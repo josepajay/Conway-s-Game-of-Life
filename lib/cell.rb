@@ -1,7 +1,7 @@
 class Cell
   attr_accessor :state, :x, :y
   # state of cell is taken as dead for state value 0 and vice versa
-  def initialize(x, y, state = rand(2))
+  def initialize(y, x, state = rand(2))
     @state = state
     @x = x
     @y = y
