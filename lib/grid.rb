@@ -26,17 +26,16 @@ class Grid
   end
 
   def next_generation
+    #Refactor!!
     next_grid = Array.new
     @grid.each do |y|
       temp = Array.new
       y.each do |x|
         case(neighbouring_alive_count(x))
         when 0, 1
-          temp << Cell.new(x.y, x.x, 0) if x.alive?
-          temp << Cell.new(x.y, x.x, 0) if x.dead?
+          temp << Cell.new(x.y, x.x, 0)
         when 3
-          temp << Cell.new(x.y, x.x, 1) if x.dead?
-          temp << Cell.new(x.y, x.x, 1) if x.alive?
+          temp << Cell.new(x.y, x.x, 1)
         when 2
           temp << Cell.new(x.y, x.x, 1) if x.alive?
           temp << Cell.new(x.y, x.x, 0) if x.dead?
