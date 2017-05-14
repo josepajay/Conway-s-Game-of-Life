@@ -12,10 +12,10 @@ class Grid
       end
       @grid << temp
     end
-    print_grid(@grid)
+    print_grid
   end
 
-  def print_grid(grid)
+  def print_grid
     grid.each do |y|
       y.each do |x|
         print x.state
@@ -49,7 +49,8 @@ class Grid
       end
       next_grid << temp
     end
-    print_grid(next_grid)
+    @grid = next_grid
+    print_grid
   end
 
   def find_neighbours(cell)
