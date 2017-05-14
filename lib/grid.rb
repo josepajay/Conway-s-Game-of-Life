@@ -25,6 +25,33 @@ class Grid
     end
   end
 
+  def next_generation
+    next_grid = Array.new
+    @grid.each do |y|
+      temp = Array.new
+      y.each do |x|
+        case(neighbouring_alive_count(x))
+        when 0, 1
+          temp << Cell.new(x.y, x.x, 0) if x.alive?
+          temp << Cell.new(x.y, x.x, 0) if x.dead?
+        when 3
+          temp << Cell.new(x.y, x.x, 1) if x.dead?
+          temp << Cell.new(x.y, x.x, 1) if x.alive?
+        when 2
+          temp << Cell.new(x.y, x.x, 1) if x.alive?
+          temp << Cell.new(x.y, x.x, 0) if x.dead?
+        when 2, 3
+          temp << Cell.new(x.y, x.x, 1) if x.alive?
+        end
+        if neighbouring_alive_count(x) > 3
+          temp << Cell.new(x.y, x.x, 0)
+        end
+      end
+      next_grid << temp
+    end
+    print_grid(next_grid)
+  end
+
   def find_neighbours(cell)
     neighbours = Array.new
     neighbours << grid[cell.y-1][cell.x-1] if (cell.y > 0 && cell.x > 0)
