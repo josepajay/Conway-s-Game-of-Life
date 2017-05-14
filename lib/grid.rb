@@ -1,5 +1,4 @@
 require_relative 'cell'
-require 'matrix'
 
 class Grid
   attr_accessor :grid
@@ -25,8 +24,8 @@ class Grid
     end
   end
 
-  def next_generation
-    #Refactor!!
+  def next_generation!
+    #Refactor, make use of cell transform method of cell class if needed
     next_grid = Array.new
     @grid.each do |y|
       temp = Array.new
