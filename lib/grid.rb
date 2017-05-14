@@ -1,12 +1,14 @@
 require_relative 'cell'
 
 class Grid
-  attr_accessor :grid
-  def initialize
+  attr_accessor :grid, :height, :width
+  def initialize(y = 10, x = 10)
+    @height = y
+    @width = x
     @grid = []
-    10.times do |y|
+    @height.times do |y|
       temp = Array.new
-      10.times do |x|
+      @width.times do |x|
         temp << Cell.new(y, x)
       end
       @grid << temp
@@ -17,10 +19,9 @@ class Grid
   def print_grid
     grid.each do |y|
       y.each do |x|
-        print x.state
-        print " "
+        print "#{x.state}       "
       end
-      puts ""
+      puts "\n \n \n"
     end
   end
 
@@ -51,18 +52,20 @@ class Grid
     print_grid
   end
 
+  private
+
   def find_neighbours(cell)
     neighbours = Array.new
     neighbours << grid[cell.y-1][cell.x-1] if (cell.y > 0 && cell.x > 0)
     neighbours << grid[cell.y-1][cell.x] if cell.y > 0
-    neighbours << grid[cell.y-1][cell.x+1] if (cell.y > 0 && cell.x < 9)
+    neighbours << grid[cell.y-1][cell.x+1] if (cell.y > 0 && cell.x < width - 1)
 
     neighbours << grid[cell.y][cell.x-1] if cell.x > 0
-    neighbours << grid[cell.y][cell.x+1] if cell.x < 9
+    neighbours << grid[cell.y][cell.x+1] if cell.x < width - 1
 
-    neighbours << grid[cell.y+1][cell.x-1] if (cell.y < 9 && cell.x > 0)
-    neighbours << grid[cell.y+1][cell.x] if cell.y < 9
-    neighbours << grid[cell.y+1][cell.x+1] if (cell.y < 9 && cell.x < 9)
+    neighbours << grid[cell.y+1][cell.x-1] if (cell.y < height - 1 && cell.x > 0)
+    neighbours << grid[cell.y+1][cell.x] if cell.y < height - 1
+    neighbours << grid[cell.y+1][cell.x+1] if (cell.y < height - 1 && cell.x < width - 1)
     neighbours.compact
   end
 
