@@ -2,18 +2,22 @@ require_relative 'cell'
 
 class Grid
   attr_accessor :grid, :height, :width
-  def initialize(y = 10, x = 10)
-    @height = y
-    @width = x
+  def initialize(height = 10, width = 10)
+    @height = height
+    @width = width
+    set_initial_grid
+    print_grid
+  end
+
+  def set_initial_grid
     @grid = []
-    @height.times do |y|
-      temp = Array.new
-      @width.times do |x|
+    height.times do |y|
+      temp = []
+      width.times do |x|
         temp << Cell.new(y, x)
       end
       @grid << temp
     end
-    print_grid
   end
 
   def print_grid
@@ -27,9 +31,9 @@ class Grid
 
   def next_generation!
     #Refactor, make use of cell transform method of cell class if needed
-    next_grid = Array.new
+    next_grid = []
     @grid.each do |y|
-      temp = Array.new
+      temp = []
       y.each do |x|
         case(neighbouring_alive_count(x))
         when 0, 1
