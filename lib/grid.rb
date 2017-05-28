@@ -36,17 +36,12 @@ class Grid
       temp = []
       y.each do |x|
         case(neighbouring_alive_count(x))
-        when 0, 1
-          temp << Cell.new(x.y, x.x, 0)
         when 3
           temp << Cell.new(x.y, x.x, 1)
         when 2
           temp << Cell.new(x.y, x.x, 1) if x.alive?
           temp << Cell.new(x.y, x.x, 0) if x.dead?
-        when 2, 3
-          temp << Cell.new(x.y, x.x, 1) if x.alive?
-        end
-        if neighbouring_alive_count(x) > 3
+        else
           temp << Cell.new(x.y, x.x, 0)
         end
       end
