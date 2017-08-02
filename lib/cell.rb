@@ -8,19 +8,11 @@ class Cell
   end
 
   def alive?
-    if state == 1
-      true
-    else
-      false
-    end
+    state == 1
   end
 
   def dead?
-    if state == 0
-      true
-    else
-      false
-    end
+    state == 0
   end
 
   def cell_transform!
